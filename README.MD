@@ -19,7 +19,7 @@
 
 Go to folder `defender-multisig-timelock-proxy-workshop`
 
-## Exercise 2 - Deploy upgradeable smart contract on Goerli public testnet
+## Exercise 1 - Deploy upgradeable smart contract on Goerli public testnet
 
 1. To deploy Proxy and Implementation execute command:
 
@@ -33,7 +33,7 @@ Go to folder `defender-multisig-timelock-proxy-workshop`
 
 `npx hardhat run --network goerli scripts/utils/read_smart_contract_data.js`
 
-## Exercise 3 - Upgrade smart contract - new version is OK
+## Exercise 2 - Upgrade smart contract - new version is OK
 
 1. To upgrade smart contract execute command:
 
@@ -43,33 +43,33 @@ Go to folder `defender-multisig-timelock-proxy-workshop`
 
 `npx hardhat run --network goerli scripts/utils/read_smart_contract_data.js`
 
-## Exercise 4 - Upgrade smart contract - new version is NOT OK
+## Exercise 3 - Upgrade smart contract - new version is NOT OK
 
 To upgrade smart contract execute command:
 
 `npx hardhat run --network goerli scripts/03_upgrade_smart_contract_NOT_ok_version.js`
 
-### Exercise 5 - Deploy only implementation
+### Exercise 4 - Deploy only implementation
 
 To deploy only smart contract implementation execute command:
 
 `npx hardhat run --network goerli scripts/04_deploy_only_implementation.js`
 
-### Exercise 6 - Execute `upgradeTo` on Proxy
+## Exercise 5 - Execute `upgradeTo` on Proxy
 
 To execute `upgradeTo` on Proxy smart contract execute command:
 
 `npx hardhat run --network goerli scripts/05_execute_proxy_uprade_to_implementation.js`
 
-### Exercise 7 - Transfer ownership to TimelockController defined in OpenZeppelin Defender
+## Exercise 6 - Transfer ownership to TimelockController defined in OpenZeppelin Defender
 
 1. First edit `06_transfer_ownership.js` script and paste correct address to Timelock Controller from Defender.
 2. Execute command:
 
 `npx hardhat run --network goerli scripts/06_transfer_ownership.js`
 
-### Exercise 8 - Deploy only implementation in version 4
+## Exercise 7 - Deploy only implementation in version 4
 
 Execute command:
 
-`npx hardhat run --network goerli scripts/04_deploy_only_implementation.js`
+`npx hardhat run --network goerli scripts/07_deploy_only_implementation_v4.js`
