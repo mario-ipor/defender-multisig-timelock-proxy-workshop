@@ -12,6 +12,11 @@ contract AmmV3Good is OwnableUpgradeable, UUPSUpgradeable {
     /// @dev new slot - correct order
 	uint256 private _slotWithoutConflict;
 
+    /// @custom:oz-upgrades-unsafe-allow constructor
+    constructor() {
+        _disableInitializers();
+    }
+
 	function initialize() public initializer {        
         __Ownable_init();
         __UUPSUpgradeable_init();

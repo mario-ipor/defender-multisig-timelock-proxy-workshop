@@ -9,6 +9,11 @@ contract AmmV2Good is OwnableUpgradeable, UUPSUpgradeable {
 
 	uint256 private _balance;
 
+    /// @custom:oz-upgrades-unsafe-allow constructor
+    constructor() {
+        _disableInitializers();
+    }
+
 	function initialize() public initializer {        
         __Ownable_init();
         __UUPSUpgradeable_init();
