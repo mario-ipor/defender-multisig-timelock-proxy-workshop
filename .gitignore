@@ -1,0 +1,9 @@
+/.idea/
+/node_modules/
+/types/
+/artifacts/
+/cache/
+/.openzeppelin/
+/abis/
+/.env
+/scripts/addresses.json
