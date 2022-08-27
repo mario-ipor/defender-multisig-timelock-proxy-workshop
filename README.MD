@@ -49,7 +49,7 @@ To upgrade smart contract execute command:
 
 `npx hardhat run --network goerli scripts/03_upgrade_smart_contract_NOT_ok_version.js`
 
-### Exercise 4 - Deploy only implementation
+## Exercise 4 - Deploy only implementation
 
 To deploy only smart contract implementation execute command:
 
