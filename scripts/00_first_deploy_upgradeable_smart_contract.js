@@ -22,10 +22,10 @@ async function main() {
     await ammContractProxy.deployed();
 
     //Example how to fetch implementation address:
-    const ammContractImplementation = await hre.upgrades.erc1967.getImplementationAddress(ammContractProxy.address);
+    const ammContractImplAddress = await hre.upgrades.erc1967.getImplementationAddress(ammContractProxy.address);
 
     await func.update(keys.AmmProxyAddress, ammContractProxy.address);
-    await func.update(keys.AmmImplAddress, ammContractImplementation);
+    await func.update(keys.AmmImplAddress, ammContractImplAddress);
 
     console.log("DONE!");
 }

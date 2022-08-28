@@ -11,7 +11,7 @@ async function main() {
 
     const ammContractProxyAddress = await func.getValue(keys.AmmProxyAddress);
 
-    const ammContract = new hre.ethers.Contract(ammContractProxyAddress, ammAbi, deployer);
+    const ammContractProxy = new hre.ethers.Contract(ammContractProxyAddress, ammAbi, deployer);
 
     if (!timelockControllerAddress) {
         throw new Error(
@@ -19,7 +19,7 @@ async function main() {
         );
     }
 
-    await ammContract.transferOwnership(timelockControllerAddress);
+    await ammContractProxy.transferOwnership(timelockControllerAddress);
 
     console.log("DONE!");
 }

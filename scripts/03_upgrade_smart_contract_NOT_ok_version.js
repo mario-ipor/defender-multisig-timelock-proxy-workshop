@@ -13,9 +13,9 @@ async function main() {
 
     await upgrades.upgradeProxy(ammContractProxyAddress, AmmV3BadFactory);
 
-    const ammContractImplementation = await hre.upgrades.erc1967.getImplementationAddress(ammContractProxyAddress);
+    const ammContractImplAddress = await hre.upgrades.erc1967.getImplementationAddress(ammContractProxyAddress);
 
-    await func.update(keys.AmmImplAddress, ammContractImplementation);
+    await func.update(keys.AmmImplAddress, ammContractImplAddress);
 
     console.log("DONE!");
 }

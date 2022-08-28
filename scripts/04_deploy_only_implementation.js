@@ -12,12 +12,12 @@ async function main() {
 
     /// @dev prepareUpgrade check if new implementation is compatible with existing proxy
     /// prepareUpgrade deploy new implementation without automated switching on proxy site
-    const newImplementationAddress = await upgrades.prepareUpgrade(ammContractProxyAddress, AmmV3GoodFactory, {
+    const ammContractImplAddress = await upgrades.prepareUpgrade(ammContractProxyAddress, AmmV3GoodFactory, {
         deployer: deployer,
         kind: "uups",
     });
 
-    await func.update(keys.AmmImplAddress2, newImplementationAddress);
+    await func.update(keys.AmmImplAddress2, ammContractImplAddress);
 
     console.log("DONE!");
 }

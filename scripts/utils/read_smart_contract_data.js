@@ -10,9 +10,9 @@ async function main() {
     const ammContractProxyAddress = await func.getValue(keys.AmmProxyAddress);
     const ammContractProxy = new hre.ethers.Contract(ammContractProxyAddress, ammAbi, deployer);
 
-    const ammContractImplementationAddress = await hre.upgrades.erc1967.getImplementationAddress(ammContractProxyAddress);
+    const ammContractImplAddress = await hre.upgrades.erc1967.getImplementationAddress(ammContractProxyAddress);
 
-    const ammContractImpl = new hre.ethers.Contract(ammContractImplementationAddress, ammAbi, deployer);
+    const ammContractImpl = new hre.ethers.Contract(ammContractImplAddress, ammAbi, deployer);
 
     const versionImpl = await ammContractImpl.getVersion();
     const balanceImpl = await ammContractImpl.getBalance();
@@ -22,15 +22,16 @@ async function main() {
     const balance = await ammContractProxy.getBalance();
     const ownerProxy = await ammContractProxy.owner();
 
-    console.log("Implementation Address: ", ammContractImplementationAddress);
-
-    console.log("[PROXY] AMM Version (logic): ", version.toString());
-    console.log("[PROXY] AMM Balance (storage): ", balance.toString());
-    console.log("[PROXY] Owner: ", ownerProxy.toString());
-
-    console.log("[IMPL] AMM Version (logic): ", versionImpl.toString());
-    console.log("[IMPL] AMM Balance (storage): ", balanceImpl.toString());
-    console.log("[IMPL] Owner: ", ownerImpl.toString());
+    console.log("-------------------------------------------------------------------------------------");
+    console.log("[PROXY] Version (logic)    : ", version.toString());
+    console.log("[PROXY] Balance (storage)  : ", balance.toString());
+    console.log("[PROXY] Owner              : ", ownerProxy.toString());
+    console.log("-------------------------------------------------------------------------------------");
+    console.log("[IMPL]  Address            : ", ammContractImplAddress);
+    console.log("[IMPL]  Version (logic)    : ", versionImpl.toString());
+    console.log("[IMPL]  Balance (storage)  : ", balanceImpl.toString());
+    console.log("[IMPL]  Owner              : ", ownerImpl.toString());
+    console.log("-------------------------------------------------------------------------------------");
 }
 
 main()

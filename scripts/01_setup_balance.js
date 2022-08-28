@@ -8,8 +8,8 @@ async function main() {
     const [deployer] = await hre.ethers.getSigners();
 
     const ammContractProxyAddress = await func.getValue(keys.AmmProxyAddress);
-    const ammContract = new hre.ethers.Contract(ammContractProxyAddress, ammAbi, deployer);
-    await ammContract.setBalance(hre.ethers.BigNumber.from("555"));
+    const ammContractProxy = new hre.ethers.Contract(ammContractProxyAddress, ammAbi, deployer);
+    await ammContractProxy.setBalance(hre.ethers.BigNumber.from("555"));
     console.log("New balance = 555");
 }
 

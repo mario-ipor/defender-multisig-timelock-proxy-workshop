@@ -9,12 +9,12 @@ async function main() {
     const ammContractProxyAddress = await func.getValue(keys.AmmProxyAddress);
     const AmmV4GoodFactory = await ethers.getContractFactory("AmmV4Good");
 
-    const newImplementationAddress = await upgrades.prepareUpgrade(ammContractProxyAddress, AmmV4GoodFactory, {
+    const newAmmContractImplAddress = await upgrades.prepareUpgrade(ammContractProxyAddress, AmmV4GoodFactory, {
         deployer: deployer,
         kind: "uups",
     });
 
-    await func.update(keys.AmmImplAddressForDefender, newImplementationAddress);
+    await func.update(keys.AmmImplAddressForDefender, newAmmContractImplAddress);
 
     console.log("DONE!");
 }

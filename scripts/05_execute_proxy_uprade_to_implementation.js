@@ -9,13 +9,13 @@ async function main() {
     const [deployer] = await ethers.getSigners();
 
     const ammContractProxyAddress = await func.getValue(keys.AmmProxyAddress);
-    const newImplAddress = await func.getValue(keys.AmmImplAddress2);
+    const newAmmContractImplAddress = await func.getValue(keys.AmmImplAddress2);
 
     const ammContractProxy = new hre.ethers.Contract(ammContractProxyAddress, ammAbi, deployer);
 
-    await ammContractProxy.upgradeTo(newImplAddress);
+    await ammContractProxy.upgradeTo(newAmmContractImplAddress);
 
-    await func.update(keys.AmmImplAddress, newImplAddress);
+    await func.update(keys.AmmImplAddress, newAmmContractImplAddress);
 
     console.log("DONE!");
 }

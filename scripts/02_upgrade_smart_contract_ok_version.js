@@ -11,14 +11,14 @@ async function main() {
 
     const AmmV2GoodFactory = await hre.ethers.getContractFactory("AmmV2Good");
 
-    /// !!! Here is executed upgrade automatically
+    /// !!! Here is executed upgrade automatically.
     /// Implementation is verified, deployed and switched in proxy.
 
     await upgrades.upgradeProxy(ammContractProxyAddress, AmmV2GoodFactory);
 
-    const ammContractImplementation = await hre.upgrades.erc1967.getImplementationAddress(ammContractProxyAddress);
+    const ammContractImplAddress = await hre.upgrades.erc1967.getImplementationAddress(ammContractProxyAddress);
 
-    await func.update(keys.AmmImplAddress, ammContractImplementation);
+    await func.update(keys.AmmImplAddress, ammContractImplAddress);
 
     console.log("DONE!");
 }
