@@ -6,15 +6,16 @@ const {ethers, upgrades} = require("hardhat");
 async function main() {
     const [deployer] = await ethers.getSigners();
 
-    const ammContractProxyAddress = await func.getValue(keys.AmmProxyAddress);
-    const AmmV4GoodFactory = await ethers.getContractFactory("AmmV4Good");
+    const proxyAddress = await func.getValue(keys.AmmProxyAddress);
+    
+    const AmmV4 = await ethers.getContractFactory("AmmV4Good");
 
-    const newAmmContractImplAddress = await upgrades.prepareUpgrade(ammContractProxyAddress, AmmV4GoodFactory, {
+    const newImplAddress = await upgrades.prepareUpgrade(proxyAddress, AmmV4, {
         deployer: deployer,
         kind: "uups",
     });
 
-    await func.update(keys.AmmImplAddressForDefender, newAmmContractImplAddress);
+    await func.update(keys.AmmImplAddressForDefender, newImplAddress);
 
     console.log("DONE!");
 }

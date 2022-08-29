@@ -7,18 +7,17 @@ const hre = require("hardhat");
 async function main() {
     const [deployer] = await hre.ethers.getSigners();
 
-    const ammContractProxyAddress = await func.getValue(keys.AmmProxyAddress);
+    const proxyAddress = await func.getValue(keys.AmmProxyAddress);
 
-    const AmmV2GoodFactory = await hre.ethers.getContractFactory("AmmV2Good");
+    const AmmV2 = await hre.ethers.getContractFactory("AmmV2Good");
 
     /// !!! Here is executed upgrade automatically.
     /// Implementation is verified, deployed and switched in proxy.
+    await upgrades.upgradeProxy(proxyAddress, AmmV2);
 
-    await upgrades.upgradeProxy(ammContractProxyAddress, AmmV2GoodFactory);
+    const implAddress = await hre.upgrades.erc1967.getImplementationAddress(proxyAddress);
 
-    const ammContractImplAddress = await hre.upgrades.erc1967.getImplementationAddress(ammContractProxyAddress);
-
-    await func.update(keys.AmmImplAddress, ammContractImplAddress);
+    await func.update(keys.AmmImplAddress, implAddress);
 
     console.log("DONE!");
 }

@@ -6,6 +6,7 @@ import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
 contract AmmV1 is OwnableUpgradeable, UUPSUpgradeable {
 
+    /// @dev Example of storage
     uint256 private _balance;
 
     /// @custom:oz-upgrades-unsafe-allow constructor
@@ -18,6 +19,7 @@ contract AmmV1 is OwnableUpgradeable, UUPSUpgradeable {
         __UUPSUpgradeable_init();
     }
 
+    /// @dev Example of logic
     function getVersion() external pure returns (uint256) {
         return 1;
     }

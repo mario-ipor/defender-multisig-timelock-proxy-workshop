@@ -2,14 +2,16 @@ const keys = require("./utils/json_keys.js");
 const func = require("./utils/json_func.js");
 
 const hre = require("hardhat");
-const ammAbi = require("../abis/ugly/contracts/workshop/AmmV1.sol/AmmV1.json");
+const abi = require("../abis/ugly/contracts/workshop/AmmV1.sol/AmmV1.json");
 
 async function main() {
     const [deployer] = await hre.ethers.getSigners();
 
-    const ammContractProxyAddress = await func.getValue(keys.AmmProxyAddress);
-    const ammContractProxy = new hre.ethers.Contract(ammContractProxyAddress, ammAbi, deployer);
-    await ammContractProxy.setBalance(hre.ethers.BigNumber.from("555"));
+    const proxyAddress = await func.getValue(keys.AmmProxyAddress);
+    const ammContract = new hre.ethers.Contract(proxyAddress, abi, deployer);
+
+    await ammContract.setBalance(hre.ethers.BigNumber.from("555"));
+
     console.log("New balance = 555");
 }
 

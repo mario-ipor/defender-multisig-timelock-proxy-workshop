@@ -1,21 +1,21 @@
 const keys = require("./utils/json_keys.js");
 const func = require("./utils/json_func.js");
 
-const { ethers} = require("hardhat");
+const {ethers} = require("hardhat");
 const hre = require("hardhat");
-const ammAbi = require("../abis/ugly/contracts/workshop/AmmV1.sol/AmmV1.json");
+const abi = require("../abis/ugly/contracts/workshop/AmmV1.sol/AmmV1.json");
 
 async function main() {
     const [deployer] = await ethers.getSigners();
 
-    const ammContractProxyAddress = await func.getValue(keys.AmmProxyAddress);
-    const newAmmContractImplAddress = await func.getValue(keys.AmmImplAddress2);
+    const proxyAddress = await func.getValue(keys.AmmProxyAddress);
+    const newImplAddress = await func.getValue(keys.AmmImplAddress2);
 
-    const ammContractProxy = new hre.ethers.Contract(ammContractProxyAddress, ammAbi, deployer);
+    const ammContract = new hre.ethers.Contract(proxyAddress, abi, deployer);
 
-    await ammContractProxy.upgradeTo(newAmmContractImplAddress);
+    await ammContract.upgradeTo(newImplAddress);
 
-    await func.update(keys.AmmImplAddress, newAmmContractImplAddress);
+    await func.update(keys.AmmImplAddress, newImplAddress);
 
     console.log("DONE!");
 }

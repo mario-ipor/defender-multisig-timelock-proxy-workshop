@@ -7,15 +7,15 @@ const hre = require("hardhat");
 async function main() {
     const [deployer] = await hre.ethers.getSigners();
 
-    const ammContractProxyAddress = await func.getValue(keys.AmmProxyAddress);
+    const proxyAddress = await func.getValue(keys.AmmProxyAddress);
 
-    const AmmV3BadFactory = await hre.ethers.getContractFactory("AmmV3Bad");
+    const AmmV3Bad = await hre.ethers.getContractFactory("AmmV3Bad");
 
-    await upgrades.upgradeProxy(ammContractProxyAddress, AmmV3BadFactory);
+    await upgrades.upgradeProxy(proxyAddress, AmmV3Bad);
 
-    const ammContractImplAddress = await hre.upgrades.erc1967.getImplementationAddress(ammContractProxyAddress);
+    const implAddress = await hre.upgrades.erc1967.getImplementationAddress(proxyAddress);
 
-    await func.update(keys.AmmImplAddress, ammContractImplAddress);
+    await func.update(keys.AmmImplAddress, implAddress);
 
     console.log("DONE!");
 }

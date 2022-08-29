@@ -8,24 +8,24 @@ const hre = require("hardhat");
 async function main() {
     const [deployer] = await hre.ethers.getSigners();
 
-    const AmmFactory = await hre.ethers.getContractFactory("AmmV1");
+    const AmmV1 = await hre.ethers.getContractFactory("AmmV1");
 
     console.log("Start deploying proxy and implementation...");
 
-    const ammContractProxy = await hre.upgrades.deployProxy(AmmFactory, {
+    const ammContract = await hre.upgrades.deployProxy(AmmV1, {
         deployer: deployer,
         initializer: "initialize",
         kind: "uups",
     });
 
     // waiting when deployed
-    await ammContractProxy.deployed();
+    await ammContract.deployed();
 
     //Example how to fetch implementation address:
-    const ammContractImplAddress = await hre.upgrades.erc1967.getImplementationAddress(ammContractProxy.address);
+    const implAddress = await hre.upgrades.erc1967.getImplementationAddress(ammContract.address);
 
-    await func.update(keys.AmmProxyAddress, ammContractProxy.address);
-    await func.update(keys.AmmImplAddress, ammContractImplAddress);
+    await func.update(keys.AmmProxyAddress, ammContract.address);
+    await func.update(keys.AmmImplAddress, implAddress);
 
     console.log("DONE!");
 }
